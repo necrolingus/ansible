@@ -1,5 +1,4 @@
 - name: Play Ping
-  hosts: ubuntu_ct_testing
   become: yes
   tasks:
    - name: Ping my hosts
