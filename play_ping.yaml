@@ -1,0 +1,10 @@
+- name: Play Ping
+  hosts: ubuntu_ct_testing
+  become: yes
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+
+   - name: Print message
+     ansible.builtin.debug:
+       msg: Ping all good!
