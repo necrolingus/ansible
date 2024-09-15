@@ -1,5 +1,5 @@
 - name: Play Ping
-  hosts: lxc_containers:virtual_machines:ansible_controllers:oracle_virtual_machines
+  hosts: ansible_controllers:lxc_pihole:lxc_testing:virtual_machines_homeassistant:virtual_machines_wazuh
   become: yes
   tasks:
    - name: Ping my hosts
