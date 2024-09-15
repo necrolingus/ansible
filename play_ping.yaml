@@ -1,4 +1,5 @@
 - name: Play Ping
+  hosts: lxc_containers:virtual_machines:ansible_controllers:oracle_virtual_machines
   become: yes
   tasks:
    - name: Ping my hosts
