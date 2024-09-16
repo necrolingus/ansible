@@ -1,0 +1,24 @@
+- name: Keep things updated
+  hosts: all
+  become: yes
+  tasks:
+   - name: apt update
+     ansible.builtin.apt:
+       update_cache: yes
+       cache_valid_time: 3600
+   - name: apt upgrade
+     ansible.builtin.apt:
+       name: "*"
+       state: latest
+   - name: Check if a reboot is needed on all servers
+     register: reboot_required_file
+     stat: path=/var/run/reboot-required
+   - name: Reboot the box if reboot file above exists
+     ansible.builtin.reboot:
+       msg: "Reboot initiated by Ansible because reboot file existed"
+       connect_timeout: 5
+       reboot_timeout: 500
+       pre_reboot_delay: 25
+       post_reboot_delay: 30
+       test_command: uptime
+     when: reboot_required_file.stat.exists
