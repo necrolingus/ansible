@@ -2,5 +2,15 @@
   hosts: virtual_machines_homeassistant
   become: yes
   tasks:
-   - name: Clear lancache cache folder
-     ansible.builtin.shell: sudo rm -rf /opt/lancache/cache/cache/*
+   - name: Remove all files in the cache directory
+      ansible.builtin.file:
+        path: /opt/lancache/cache/cache/
+        state: absent
+
+    - name: Recreate the cache directory
+      ansible.builtin.file:
+        path: /opt/lancache/cache/cache/
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
