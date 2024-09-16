@@ -1,6 +1,6 @@
 - name: Clear lancache
   hosts: virtual_machines_homeassistant
-  become: yes
+  become: true
   become_user: root
   tasks:
     - name: Remove all files in the cache directory
