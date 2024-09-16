@@ -3,3 +3,6 @@
   tasks:
    - name: Update pihole
      ansible.builtin.shell: pihole -up
+     register: results
+   - debug:
+     var: results.stdout
