@@ -5,4 +5,4 @@
      ansible.builtin.shell: pihole -up
      register: results
    - debug:
-     var: results.stdout
+       var: results.stdout
