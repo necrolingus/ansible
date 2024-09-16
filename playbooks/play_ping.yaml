@@ -1,6 +1,6 @@
 - name: Play Ping
   hosts: all
-  become: yes
+  become: true
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
