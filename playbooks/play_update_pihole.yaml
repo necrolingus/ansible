@@ -3,3 +3,5 @@
   tasks:
    - name: Update pihole
      ansible.builtin.shell: pihole -up
+     ansible.builtin.debug:
+       msg: Ping all good!
