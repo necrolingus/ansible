@@ -6,11 +6,11 @@
      ansible.builtin.file:
        path: /opt/lancache/cache/cache/
        state: absent
-
-    - name: Recreate the cache directory
-      ansible.builtin.file:
-        path: /opt/lancache/cache/cache/
-        state: directory
-        mode: '0755'
-        owner: root
-        group: root
+   
+   - name: Recreate the cache directory
+     ansible.builtin.file:
+       path: /opt/lancache/cache/cache/
+       state: directory
+       mode: '0755'
+       owner: root
+       group: root
