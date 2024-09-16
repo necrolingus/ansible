@@ -2,4 +2,4 @@
   hosts: lxc_pihole
   tasks:
    - name: Update pihole
-     ansible.builtin.command: pihole -up
+     ansible.builtin.shell: pihole -up
