@@ -3,4 +3,4 @@
   become: yes
   tasks:
    - name: Clear lancache cache folder
-     ansible.builtin.shell: rm -rf /opt/lancache/cache/cache/*
+     ansible.builtin.shell: sudo rm -rf /opt/lancache/cache/cache/*
