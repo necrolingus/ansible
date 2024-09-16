@@ -3,4 +3,4 @@
   become: true
   tasks:
    - name: Update pihole
-     ansible.builtin.command: pihole -up
+     ansible.builtin.shell: pihole -up
