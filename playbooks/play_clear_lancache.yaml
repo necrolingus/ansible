@@ -1,6 +1,7 @@
 - name: Clear lancache
   hosts: virtual_machines_homeassistant
   become: yes
+  become_user: root
   become_method: sudo
   tasks:
    - name: Remove all files in the cache directory
