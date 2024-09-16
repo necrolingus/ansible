@@ -2,7 +2,7 @@
   hosts: lxc_pihole
   tasks:
    - name: Update pihole
-     ansible.builtin.shell: pihole -up
+     ansible.builtin.command: pihole -up
      register: results
    - debug:
        var: results.stdout
