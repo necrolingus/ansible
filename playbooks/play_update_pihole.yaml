@@ -3,6 +3,4 @@
   become: true
   tasks:
    - name: Update pihole
-     become: true
-     become_user: root
      ansible.builtin.command: pihole -up
