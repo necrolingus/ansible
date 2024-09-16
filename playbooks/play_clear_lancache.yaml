@@ -1,22 +1,10 @@
 - name: Clear lancache
   hosts: virtual_machines_homeassistant
   become: yes
+  become_user: root
+  become_method: sudo
   tasks:
-    - name: Set permissions on cache directory
-      ansible.builtin.file:
-        path: /opt/lancache/cache/cache/
-        mode: '0755'
-        recurse: yes
-
-    - name: Remove cache directory
-      ansible.builtin.file:
-        path: /opt/lancache/cache/cache/
-        state: absent
-
-    - name: Recreate cache directory
-      ansible.builtin.file:
-        path: /opt/lancache/cache/cache/
-        state: directory
-        mode: '0755'
-        owner: www-data
-        group: root
+    - name: Remove all files in the cache directory
+      ansible.builtin.shell: rm -rf /opt/lancache/cache/cache/*
+      args:
+        warn: no
