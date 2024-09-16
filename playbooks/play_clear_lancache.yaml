@@ -3,9 +3,9 @@
   become: yes
   tasks:
    - name: Remove all files in the cache directory
-      ansible.builtin.file:
-        path: /opt/lancache/cache/cache/
-        state: absent
+     ansible.builtin.file:
+       path: /opt/lancache/cache/cache/
+       state: absent
 
     - name: Recreate the cache directory
       ansible.builtin.file:
