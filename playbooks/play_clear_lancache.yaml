@@ -1,9 +1,7 @@
 - name: Clear lancache
   hosts: virtual_machines_homeassistant
   become: true
-  become_user: root
   tasks:
     - name: Remove all files in the cache directory
+      become: true
       ansible.builtin.shell: rm -rf /opt/lancache/cache/cache/*
-      args:
-        warn: no
