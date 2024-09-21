@@ -17,8 +17,8 @@
      ansible.builtin.reboot:
        msg: "Reboot initiated by Ansible because reboot file existed"
        connect_timeout: 5
-       reboot_timeout: 500
-       pre_reboot_delay: 25
-       post_reboot_delay: 30
+       reboot_timeout: 600
+       pre_reboot_delay: 120
+       post_reboot_delay: 120
        test_command: uptime
      when: reboot_required_file.stat.exists
