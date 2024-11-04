@@ -16,9 +16,9 @@
    - name: Reboot the box if reboot file above exists
      ansible.builtin.reboot:
        msg: "Reboot initiated by Ansible because reboot file existed"
-       connect_timeout: 5
+       connect_timeout: 15
        reboot_timeout: 600
        pre_reboot_delay: 120
-       post_reboot_delay: 120
-       test_command: uptime
+       post_reboot_delay: 240
+       test_command: whoami
      when: reboot_required_file.stat.exists
