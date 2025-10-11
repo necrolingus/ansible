@@ -1,6 +1,23 @@
-- name: Clear lancache
+- name: Remove lancache folder and show before/after sizes
   hosts: virtual_machines_homeassistant
   become: true
   tasks:
-    - name: Remove all files in the cache directory
+    - name: Get size before
+      ansible.builtin.shell: du -sh /opt/lancache/cache/cache | awk '{print $1}'
+      register: before
+      changed_when: false
+
+    - name: Clear cache
       ansible.builtin.shell: rm -rf /opt/lancache/cache/cache/*
+
+    - name: Get size after
+      ansible.builtin.shell: du -sh /opt/lancache/cache/cache | awk '{print $1}'
+      register: after
+      changed_when: false
+
+    - name: Show comparison
+      ansible.builtin.debug:
+        msg: |
+          Lancache cleanup completed.
+          Before: {{ before.stdout }}
+          After:  {{ after.stdout }}
