@@ -1,0 +1,25 @@
+- name: Keep things updated
+  hosts: all
+  become: yes
+  tasks:
+    - name: apt update
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: apt upgrade
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+
+    - name: Check if a reboot is needed on all servers
+      register: reboot_required_file
+      ansible.builtin.stat: 
+        path: /var/run/reboot-required
+
+    - name: Schedule a fire-and-forget reboot
+      ansible.builtin.shell: "sleep 5 && shutdown -r now"
+      async: 1
+      poll: 0
+      when: reboot_required_file.stat.exists
+      ignore_errors: true
