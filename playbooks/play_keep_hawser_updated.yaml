@@ -1,5 +1,5 @@
 - name: Update Hawser Stack
-  hosts: hawser_servers
+  hosts: all
   become: yes
   vars:
     # Adjust this path to where hawser lives on the remote nodes
