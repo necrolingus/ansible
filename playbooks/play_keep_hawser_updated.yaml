@@ -1,0 +1,28 @@
+- name: Update Hawser Stack
+  hosts: hawser_servers
+  become: yes
+  vars:
+    # Adjust this path to where hawser lives on the remote nodes
+    stack_path: "/opt/stacks/hawser"
+
+  tasks:
+    - name: Pull and Recreate Hawser
+      community.docker.docker_compose_v2:
+        project_src: "{{ stack_path }}"
+        state: present
+        pull: always
+        recreate: always
+      register: compose_result
+
+    - name: Verify container is running
+      community.docker.docker_container_info:
+        name: hawser
+      register: container_info
+      until: container_info.container.State.Status == 'running'
+      retries: 12
+      delay: 5
+
+    - name: Prune old images
+      ansible.builtin.shell: "docker image prune -f"
+      when: compose_result.changed
+      # Only runs if a new image was actually pulled to keep the disk clean
