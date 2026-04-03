@@ -21,8 +21,3 @@
       until: container_info.container.State.Status == 'running'
       retries: 12
       delay: 5
-
-    - name: Prune old images
-      ansible.builtin.shell: "docker image prune -f"
-      when: compose_result.changed
-      # Only runs if a new image was actually pulled to keep the disk clean
