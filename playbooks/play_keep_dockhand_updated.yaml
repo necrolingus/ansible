@@ -1,5 +1,5 @@
 - name: Update Dockhand Stack
-  hosts: all
+  hosts: virtual_machines_homeassistant
   become: yes
   vars:
     # Adjust this path to where dockhand lives on the remote nodes
