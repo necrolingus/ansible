@@ -1,0 +1,9 @@
+- name: Update Hawser Stack
+  hosts: all
+  become: true
+  tasks:
+    - name: Pull latest images and restart hawser
+      community.docker.docker_compose_v2:
+        project_src: /opt/stacks/hawser
+        pull: always
+        state: present
