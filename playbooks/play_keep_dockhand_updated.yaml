@@ -1,0 +1,23 @@
+- name: Update Dockhand Stack
+  hosts: all
+  become: yes
+  vars:
+    # Adjust this path to where dockhand lives on the remote nodes
+    stack_path: "/opt/stacks/dockhand"
+
+  tasks:
+    - name: Pull and Recreate Dockhand
+      community.docker.docker_compose_v2:
+        project_src: "{{ stack_path }}"
+        state: present
+        pull: always
+        recreate: always
+      register: compose_result
+
+    - name: Verify container is running
+      community.docker.docker_container_info:
+        name: dockhand
+      register: container_info
+      until: container_info.container.State.Status == 'running'
+      retries: 12
+      delay: 5
